@@ -1,0 +1,52 @@
+{
+  "region": "ap-southeast-1",
+  "role_assume": "arn:aws:iam::123456789:role/assume_get_object_S3",
+  "token_url": "https://gatewaylb-int.anmv.com.vn/token?grant_type=client_credentials",
+  "token_header": {
+    "Authorization": "Basic Vlg2eGZhYVVCMWdmalNVcENhUWk0TlI3cEd3YTpEcVBpZV9qYWlwTkE2Y0JpZEtqZWFWZjBEVHNh"
+  },
+  "pull_type": {
+    "eod": {
+      "check_source_url": "https://gatewaylb-int.anmv.com.vn/eod-api-check-source/0.1.5/check-source-etl",
+      "bucket_name": "anmv-bucket-eod"
+    },
+    "raw": {
+      "check_source_url": "https://gatewaylb-int.anmv.com.vn/eod-api-check-source/0.1.5/check-source-etl",
+      "bucket_name": "anmv-bucket-raw"
+    },
+    "appegn": {
+      "check_source_url": "https://gatewaylb-int.anmv.com.vn/appegn-api-check-source/0.2.0/check-source-etl-appegn",
+      "bucket_name": "anmv-bucket-appegn"
+    }
+  },
+  "list_file": [
+    {
+      "key_check_source": "eod|aws_bankwide|t24_mvt",
+      "pull_type": "eod",
+      "s3_path_in": "anmv-bucket-eod/t24_mvt__mnp/PATTERN_DATE/",
+      "file_extension": "parquet",
+      "file_out_name": "T24_YYYYMMDD_MVT_OK.csv",
+      "path_out": "/home/ec2-user/anmv/erp_pullfile_from_ec2/sapinst/MVT/",
+      "transform": {
+        "rename_column": {
+          "org_value": "entry_id,booking_date,application,ccy,mvt_lcy,mvt_fcy,sector,resident,term,cust_class,com_store,mbn_type,product_code,dao,segment,consol_key,sbv_no,company,indsutry,channel,doanh_thu,trans_ref,sbv_line,pl_category,inputter,dept_code,sap",
+          "new_value": "ENTRY.ID,BOOKING.DATE,APPLICATION,CCY,MVT.LCY,MVT.FCY,SECTOR,RESIDENT,TERM,CUST.CLASS,COM.STORE,MBN.TYPE,PRODUCT.CODE,DAO,SEGMENT,CONSOL.KEY,SBV.NO,COMPANY,INDSUTRY,CHANNEL,DOANH_THU,TRANS_REF,SBV_LINE,PL.CATEGORY,INPUTTER,DEPT_CODE,SAP"
+        }
+      }
+    },
+    {
+      "key_check_source": "appegn|lvl03-engine|thoailai_covid",
+      "pull_type": "appegn",
+      "s3_path_in": "migration/thoailai_covid/PATTERN_DATE/",
+      "file_extension": "parquet",
+      "file_out_name": "THOAILAI_COVID_YYYYMM.CSV",
+      "path_out": "/home/ec2-user/anmv/pullfile_from_ec2/sapinst/DWH/",
+      "transform": {
+        "rename_column": {
+          "org_value": "business_date,ccy,reference,posting_key,gl_sap,amount_fcy,amount_lcy,company,segment,gl_sbv,ledger_group",
+          "new_value": "BUSINESS_DATE,CCY,REFERENCE,POSTING_KEY,GL_SAP,AMOUNT_FCY,AMOUNT_LCY,COMPANY,SEGMENT,GL_SBV,LEDGER_GROUP"
+        }
+      }
+    }
+  ]
+}

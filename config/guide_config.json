@@ -1,0 +1,38 @@
+{
+  "region": "ap-southeast-1",
+  "role_assume": "role bên tài khoản cung cấp, bên đích sẽ assume role này để pull object từ S3",
+  "token_url": "endpoint api để get credentials, phục vụ call các api sau",
+  "token_header": {
+    "Authorization": "Token xác thực cho endpoint token_url"
+  },
+  "pull_type": {
+    "eod": {
+      "check_source_url": "đường dẫn check api đối với loại type là eod",
+      "bucket_name": "bucket dùng để download đối với type là eod"
+    },
+    "raw": {
+      "check_source_url": "đường dẫn check api đối với loại type là raw",
+      "bucket_name": "bucket dùng để download đối với type là raw"
+    },
+    "appegn": {
+      "check_source_url": "đường dẫn check api đối với loại type là appegn",
+      "bucket_name": "bucket dùng để download đối với type là appegn"
+    }
+  },
+  "list_file": [
+    {
+      "key_check_source": "Giá trị để truyền vào API check source",
+      "pull_type": "key của pull_type bên trên",
+      "s3_path_in": "đường dẫn s3 đến object (path)",
+      "file_extension": "loại file",
+      "file_out_name": "file name muốn create ở đích",
+      "path_out": "đường dẫn lưu file ở đích",
+      "transform": {
+        "rename_column": {
+          "org_value": "danh sách column cần select",
+          "new_value": "danh sách column cần rename"
+        }
+      }
+    }
+  ]
+}

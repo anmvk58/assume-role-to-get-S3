@@ -1,0 +1,44 @@
+{
+  "token_url": "https://gatewaylb-int.anmv.com.vn/token?grant_type=client_credentials",
+  "token_header": {
+    "Authorization": "Basic dnJjUTJicEZDTXlOVWVDellMWlJ5ZWxoMmJNYTpzdVRKTUVUVWkzSlZGeV90RklCRFNrOFZUUlVh"
+  },
+  "check_source_url": "https://gatewaylb-int.anmv.com.vn/dih-api-check-source-daily/0.1.0/check-source-etl",
+  "BUCKET_NAME": "anmv-prod-lvl00-landing-out",
+  "role_assume": "arn:aws:iam::123456789:role/role_name_assume",
+  "region": "ap-southeast-1",
+  "list_file": [
+    {
+      "file": "KD_YYYYMMDD_MVT_OK.CSV",
+      "path": "/sapinst/treasury/mvt/"
+    },
+    {
+      "file": "T24_YYYYMMDD_FT_OK.CSV",
+      "path": "/sapinst/MVT/"
+    },
+    {
+      "file": "T24_YYYYMMDD_LINE.BAL_OK.CSV",
+      "path": "/sapinst/MVT/"
+    },
+    {
+      "file": "T24_YYYYMMDD_TT_OK.CSV",
+      "path": "/sapinst/MVT/"
+    },
+    {
+      "file": "MF_YYYYMMDD_FC_V*.CSV",
+      "path": "/sapinst/direct/sum/"
+    },
+    {
+      "file": "MF_COA_YYYYMMDD_V*.CSV",
+      "path": "/sapinst/direct/sum/"
+    },
+    {
+      "file": "MF_TRIAL_BALANCE_YYYYMMDD.zip",
+      "path": "/sapinst/direct/sum/"
+    },
+    {
+      "file": "T24_YYYYMMDD_MVT_OK.zip",
+      "path": "/sapinst/MVT/"
+    }
+  ]
+}
